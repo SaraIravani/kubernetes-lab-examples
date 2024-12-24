@@ -37,3 +37,47 @@ spec:
   ingress:
   - from:
     - podSelector: {}
+```
+🎯 Purpose:
+
+    Allows unrestricted internal communication within the frontend namespace.
+    Ideal for microservices that need free communication within the same namespace.
+## 🔗 **Scenario 2: Cross-Namespace Communication**
+### **📝 Use Case:**
+
+Enable controlled communication between namespaces where:
+
+    . frontend needs access to backend.
+    . backend needs access to monitoring.  
+📄 Policy 1: frontend → backend    
+```
+ apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: backend
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: frontend
+```
+📄 Policy 2: backend → monitoring
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-monitoring
+  namespace: monitoring
+spec:
+  podSelector: {}
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: backend
+```
+
+   
