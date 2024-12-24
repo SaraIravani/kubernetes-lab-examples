@@ -49,16 +49,26 @@ This guide explores **advanced scheduling configurations** in Kubernetes **v1.29
 ### **1. Affinity with Topology Key**
 **Scenario**: Ensure pods with `app=frontend` are scheduled in the **same failure domain** as pods with `app=backend`.  
 ```yaml
-affinity:
-  podAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchExpressions:
-        - key: app
-          operator: In
-          values:
-          - backend
-      topologyKey: failure-domain.beta.kubernetes.io/zone
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - backend
+        topologyKey: failure-domain.beta.kubernetes.io/zone
+  containers:
+  - name: frontend
+    image: nginx
 ```
 **Explanation**:  
 - **topologyKey** groups pods within the **same zone** for low-latency communication.  
