@@ -1,9 +1,11 @@
 
-# 🚀 Kubernetes Lab Examples
+# 🚀 Kubernetes NetworkPolicy Scenarios  
 
-![Kubernetes](https://img.shields.io/badge/Kubernetes-Labs-blue?style=for-the-badge&logo=kubernetes)
+![Kubernetes NetworkPolicy](https://img.shields.io/badge/Kubernetes-NetworkPolicy-blue?style=for-the-badge&logo=kubernetes)  
 
-**A hands-on collection of Kubernetes examples, labs, and best practices for DevOps engineers and developers. 🚀 Learn how to manage deployments, configure networking, secure workloads, and optimize performance with real-world scenarios and YAML configurations. Perfect for building, testing, and mastering Kubernetes!**
+Welcome to the **Kubernetes NetworkPolicy Scenarios** repository! 🌐  
+
+This repository demonstrates **real-world use cases** of Kubernetes **NetworkPolicies** for managing network access between Pods across namespaces. Whether you're a beginner or an experienced DevOps engineer, these examples will help you **secure** your Kubernetes workloads effectively.  
 
 ---
 
