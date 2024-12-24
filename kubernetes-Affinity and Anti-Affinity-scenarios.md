@@ -47,7 +47,7 @@ This guide explores **advanced scheduling configurations** in Kubernetes **v1.29
 ## Examples
 
 ### **1. Affinity with Topology Key**
-**Scenario**: Ensure pods with `app=frontend` are scheduled in the **same failure domain** as pods with `app=backend`.  
+**Scenario**: Ensure **frontend** pods are scheduled in the **same failure domain (zone)** as **backend** pods to achieve **low-latency communication** and **high performance**.
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -70,10 +70,12 @@ spec:
   - name: frontend
     image: nginx
 ```
-**Explanation**:  
-- **topologyKey** groups pods within the **same zone** for low-latency communication.  
-- Ensures **frontend** pods run **close** to **backend** pods for **high performance**.  
+**Explanation:**
 
+- **`podAffinity`:** Ensures that **frontend** pods are scheduled **only in zones** where **backend** pods already exist.  
+- **`topologyKey`:** Restricts the affinity rule to the **zone level**, grouping pods within the **same failure domain** for **low-latency communication**.  
+- Suitable for **microservices architectures** or **distributed applications** requiring **high performance** and **fast inter-service communication**.  
+ 
 ---
 
 ### **2. Weighted Preferences for Node Affinity**
